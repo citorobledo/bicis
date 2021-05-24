@@ -1,0 +1,43 @@
+import bicis.*
+import deposito.*
+import accesorios.*
+test "DepositoTest" {
+	const c=new Farolito()
+	const d=new Canasto(volumen=10)
+	// bici 1
+	const bici1 = new Bici(rodado=28, largo=150, marca="Olmo")
+	bici1.agregarAccesorio(c)
+	
+	//bici 2
+	const bici2 = new Bici(rodado=26, largo=110, marca="Legnano")
+	bici2.agregarAccesorio(c)
+	bici2.agregarAccesorio(d)
+//	bici2.agregarAccesorio(e)
+	//bici 3
+//	 e.largo(6)
+//	 e.ojoGato(false )
+	const bici3 = new Bici(rodado=20, largo=90, marca="Legnano")
+	const bici4 = new Bici(rodado=28, largo=100, marca="Olmo")
+	const bici5 = new Bici(rodado=28, largo=110, marca="Olmo")
+	const bici6 = new Bici(rodado=28, largo=90, marca="Olmo")
+	const bici7 = new Bici(rodado=28, largo=120, marca="Olmo")
+	const bici8 = new Bici(rodado=26, largo=110, marca="Legnano")
+	const a = new Deposito()
+	a.agregarBici(bici1)
+	a.agregarBici(bici2)
+	a.agregarBici(bici3)
+	a.agregarBici(bici4)
+	a.agregarBici(bici5)
+	a.agregarBici(bici6)
+	a.agregarBici(bici7)
+	a.agregarBici(bici8)
+	
+	assert.that(a.bicisRapidas().count({cosa=>cosa.carga()>=0})==7)
+	
+	assert.that(!a.esDepositoNocturno())
+	assert.that(a.hayBiciQueCarga(10))
+	assert.that(a.marcaBiciRapidas().size()==2)
+	assert.that(a.bicisSinAccesorios()==6)
+	assert.that(a.bicisCompanieras(bici4).size()==2)
+	
+}

@@ -1,0 +1,53 @@
+import bicis.*
+import accesorios.*
+
+test "BicisTest" {
+	//bici fantasma
+	const a = new Bici(rodado=26)
+	a.rodado(29)
+	a.marca("bianchi")
+	a.largo(150)
+	const c=new Farolito()
+	const d=new Canasto(volumen=8)
+	var e=new Morral(largo=21, ojoGato=true )
+	a.agregarAccesorio(d)
+	a.agregarAccesorio(c)
+	assert.that(a.accesorios()==[d, c])
+	assert.that(a.cantidadAccesoriosLivianos()==2)
+
+	// bici 1
+	const bici1 = new Bici(rodado=28, largo=150, marca="Olmo")
+	bici1.agregarAccesorio(c)
+	assert.that(bici1.altura()==85)
+	assert.that(bici1.velocidadCrucero()==34)
+	assert.that(bici1.carga()==0)
+	assert.that(bici1.peso()==14.5)
+	assert.that(bici1.tieneLuz())
+	assert.that(bici1.cantidadAccesoriosLivianos()==1)
+	
+	//bici 2
+	const bici2 = new Bici(rodado=26, largo=110, marca="Legnano")
+	bici2.agregarAccesorio(c)
+	bici2.agregarAccesorio(d)
+	bici2.agregarAccesorio(e)
+	assert.that(bici2.altura()==80)
+	assert.that(bici2.velocidadCrucero()==28)
+	assert.that(bici2.carga()==23)
+	assert.that(bici2.peso()==15.5)
+	assert.that(bici2.tieneLuz())
+	assert.that(bici2.cantidadAccesoriosLivianos()==2)
+	
+	
+	//bici 3
+	 e.largo(6)
+	 e.ojoGato(false )
+	const bici3 = new Bici(rodado=20, largo=90, marca="Legnano")
+	bici3.agregarAccesorio(e)
+	assert.that(bici3.altura()==65)
+	assert.that(bici3.velocidadCrucero()==22)
+	assert.that(bici3.carga()==2)
+	assert.that(bici3.peso()==11.2)
+	assert.that(!bici3.tieneLuz())
+	assert.that(bici3.cantidadAccesoriosLivianos()==0)
+	
+}
